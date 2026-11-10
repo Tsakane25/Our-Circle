@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Circle · Prototype</title>
+<style>
+  :root {
+    --bg: #dde7f8;
+    --card: #ffffff;
+    --dark: #14161c;
+    --blue: #3f6fe8;
+    --blue-text: #1f4fd1;
+    --blue-soft: #e8eefc;
+    --track: #dfe6f5;
+    --grey: #4a4f5c;
+    --line: #e3e8f3;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--dark);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.45;
+  }
+  .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .proto {
+    background: var(--dark);
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  header { padding: 22px 4px 4px; }
+  h1 { font-size: 32px; line-height: 1.1; margin: 0; font-weight: 800; }
+  .sub { color: var(--grey); margin: 6px 0 0; font-size: 18px; }
+
+  .toggle {
+    display: flex; gap: 6px; background: var(--dark); border-radius: 999px;
+    padding: 6px; margin: 18px 0 16px;
+  }
+  .toggle button {
+    flex: 1; min-height: 52px; border: 0; border-radius: 999px; background: transparent; color: #fff;
+    font: inherit; font-size: 18px; font-weight: 700; cursor: pointer;
+  }
+  .toggle button[aria-pressed="true"] { background: var(--blue); color: #fff; }
+
+  .hero {
+    background: var(--dark); color: #fff; border-radius: 28px; padding: 22px 22px 20px;
+    margin-bottom: 16px;
+  }
+  .hero .label { margin: 0; color: #b9c3dd; font-size: 18px; }
+  .hero .who { margin: 2px 0 6px; font-size: 44px; font-weight: 800; line-height: 1.05; }
+  .hero .pot { margin: 0 0 16px; color: #dfe6f5; font-size: 19px; }
+  .nextpill {
+    display: inline-block; background: #fff; color: var(--dark); border-radius: 999px;
+    padding: 10px 18px; font-size: 20px; font-weight: 700;
+  }
+
+  .card { background: var(--card); border-radius: 28px; padding: 22px 18px; margin-bottom: 16px; box-shadow: 0 6px 18px rgba(31,79,209,0.08); }
+  .ringbox { position: relative; width: 100%; max-width: 300px; margin: 0 auto; }
+  .ringbox svg { display: block; width: 100%; height: auto; }
+  .ringtext {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; pointer-events: none;
+  }
+  .ringtext .big { font-size: 46px; font-weight: 800; line-height: 1; }
+  .ringtext .small { font-size: 18px; color: var(--grey); margin-top: 4px; }
+  .summary { text-align: center; font-size: 21px; margin: 14px 0 4px; font-weight: 700; }
+  .key { text-align: center; color: var(--grey); font-size: 16px; margin: 0; }
+
+  .done { background: var(--blue); color: #fff; border-radius: 20px; padding: 16px 18px; margin-bottom: 16px; font-weight: 700; }
+
+  h2 { font-size: 26px; margin: 26px 4px 12px; font-weight: 800; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li.row { background: var(--card); border-radius: 24px; padding: 16px; margin-bottom: 12px; box-shadow: 0 6px 18px rgba(31,79,209,0.08); }
+  li.row.me-turn { outline: 3px solid var(--blue); }
+  .top { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    flex: none; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--blue-soft); color: var(--blue-text);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 22px;
+  }
+  .name { flex: 1; font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .tag { display: block; font-size: 16px; font-weight: 600; color: var(--grey); }
+  .status { flex: none; padding: 7px 14px; border-radius: 999px; font-size: 18px; font-weight: 700; }
+  .status.paid { background: var(--blue); color: #fff; }
+  .status.unpaid { background: var(--blue-soft); color: var(--dark); border: 2px solid var(--track); }
+
+  .actions { margin-top: 14px; }
+  .btn {
+    width: 100%; min-height: 56px; border-radius: 999px; border: 0;
+    font: inherit; font-size: 20px; font-weight: 700; cursor: pointer;
+  }
+  .btn.mark { background: var(--dark); color: #fff; }
+  .btn.undo { background: var(--blue-soft); color: var(--dark); }
+  .btn:focus-visible, .toggle button:focus-visible { outline: 4px solid var(--blue-text); outline-offset: 3px; }
+
+  footer { margin-top: 28px; padding: 16px 4px 0; border-top: 1px solid #c3d0ea; color: var(--grey); font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div class="proto">Prototype with invented data. No real money is used.</div>
+
+<div class="wrap">
+  <header>
+    <h1>Our Circle</h1>
+    <p class="sub" id="roundInfo"></p>
+  </header>
+
+  <div class="toggle" role="group" aria-label="Choose view">
+    <button type="button" id="viewOrganiser" aria-pressed="true">Organiser view</button>
+    <button type="button" id="viewMember" aria-pressed="false">Member view</button>
+  </div>
+
+  <section class="hero" aria-live="polite">
+    <p class="label">Takes the pot this month</p>
+    <p class="who" id="recipient"></p>
+    <p class="pot" id="potLine"></p>
+    <span class="nextpill" id="nextLine"></span>
+  </section>
+
+  <section class="card">
+    <div class="ringbox" aria-hidden="true">
+      <svg viewBox="0 0 300 300" id="ring"></svg>
+      <div class="ringtext">
+        <span class="big" id="ringBig"></span>
+        <span class="small">have paid</span>
+      </div>
+    </div>
+    <p class="summary" id="summary" aria-live="polite"></p>
+    <p class="key">Blue = paid. Light = not paid yet.</p>
+  </section>
+
+  <div id="doneBox"></div>
+
+  <h2>Who has paid</h2>
+  <ul id="list"></ul>
+
+  <footer>
+    This is a prototype. The names and amounts are invented. Nothing here is saved, and no money moves. If you reload the page, it starts again.
+  </footer>
+</div>
+
+<script>
+  // ---- Invented data (change these freely) ----
+  var CONTRIBUTION = 100;          // euro each person pays per month
+  var MONTH_NAME = "November";
+  var THIS_TURN = 3;               // whose turn it is this month (1 to 10)
+
+  // Order = the order people take the pot. "paid" = has paid this month.
+  var members = [
+    { name: "Thandi",    organiser: true,  paid: true  },
+    { name: "Sipho",     organiser: false, paid: true  },
+    { name: "Nomsa",     organiser: false, paid: true  },
+    { name: "Mandla",    organiser: false, paid: true  },
+    { name: "Lindiwe",   organiser: false, paid: true  },
+    { name: "Sibusiso",  organiser: false, paid: true  },
+    { name: "Zanele",    organiser: false, paid: false },
+    { name: "Bongani",   organiser: false, paid: false },
+    { name: "Nokuthula", organiser: false, paid: false },
+    { name: "Themba",    organiser: false, paid: false }
+  ];
+  var organiserView = true;
+
+  var TOTAL = members.length;
+  var POT = CONTRIBUTION * TOTAL;
+
+  function $(id) { return document.getElementById(id); }
+  function euro(n) { return "\u20AC" + n.toLocaleString("en-IE"); }
+
+  function countPaid() {
+    var c = 0;
+    for (var i = 0; i < members.length; i++) { if (members[i].paid) c++; }
+    return c;
+  }
+
+  // Donut chart: one segment per member
+  function drawRing() {
+    var r = 105, C = 2 * Math.PI * r, seg = C / TOTAL, gap = 8;
+    var out = "";
+    for (var i = 0; i < TOTAL; i++) {
+      out += '<circle cx="150" cy="150" r="' + r + '" fill="none" stroke-width="38"' +
+        ' stroke="' + (members[i].paid ? "#3f6fe8" : "#dfe6f5") + '"' +
+        ' stroke-dasharray="' + (seg - gap) + " " + (C - (seg - gap)) + '"' +
+        ' stroke-dashoffset="' + (-(i * seg + gap / 2)) + '"' +
+        ' transform="rotate(-90 150 150)"/>';
+    }
+    $("ring").innerHTML = out;
+  }
+
+  function render() {
+    var paid = countPaid();
+    var left = TOTAL - paid;
+    var turnMember = members[THIS_TURN - 1];
+    var nextMember = members[THIS_TURN % TOTAL];
+
+    $("roundInfo").textContent = MONTH_NAME + " · Month " + THIS_TURN + " of " + TOTAL + " · " + euro(CONTRIBUTION) + " each";
+    $("recipient").textContent = turnMember.name;
+    $("potLine").textContent = euro(POT) + " pot · " + euro(paid * CONTRIBUTION) + " collected so far";
+    $("nextLine").textContent = "Next in line: " + nextMember.name;
+
+    $("ringBig").textContent = paid + " of " + TOTAL;
+    $("summary").textContent = left === 0
+      ? "Everyone has paid."
+      : left + (left === 1 ? " person has" : " people have") + " not paid yet.";
+
+    $("doneBox").innerHTML = left === 0
+      ? '<div class="done">All paid. ' + euro(POT) + ' is ready for ' + turnMember.name + '.</div>'
+      : "";
+
+    drawRing();
+
+    var html = "";
+    for (var i = 0; i < members.length; i++) {
+      var m = members[i];
+      var tags = [];
+      if (m.organiser) tags.push("Organiser");
+      if (i + 1 === THIS_TURN) tags.push("Takes the pot this month");
+      else if (i + 1 === (THIS_TURN % TOTAL) + 1) tags.push("Next in line");
+      else if (i + 1 < THIS_TURN) tags.push("Already took the pot");
+
+      html += '<li class="row' + (i + 1 === THIS_TURN ? " me-turn" : "") + '">';
+      html += '<div class="top">';
+      html += '<span class="avatar" aria-hidden="true">' + m.name.charAt(0) + '</span>';
+      html += '<span class="name">' + m.name + (tags.length ? '<span class="tag">' + tags.join(" · ") + '</span>' : "") + '</span>';
+      html += '<span class="status ' + (m.paid ? "paid" : "unpaid") + '">' + (m.paid ? "Paid" : "Not paid yet") + '</span>';
+      html += '</div>';
+      if (organiserView) {
+        html += '<div class="actions">';
+        if (m.paid) {
+          html += '<button type="button" class="btn undo" data-i="' + i + '">Undo: not paid</button>';
+        } else {
+          html += '<button type="button" class="btn mark" data-i="' + i + '">Mark ' + m.name + ' as paid</button>';
+        }
+        html += '</div>';
+      }
+      html += '</li>';
+    }
+    $("list").innerHTML = html;
+
+    $("viewOrganiser").setAttribute("aria-pressed", organiserView ? "true" : "false");
+    $("viewMember").setAttribute("aria-pressed", organiserView ? "false" : "true");
+  }
+
+  $("list").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-i]");
+    if (!btn) return;
+    var i = parseInt(btn.getAttribute("data-i"), 10);
+    members[i].paid = !members[i].paid;
+    render();
+  });
+  $("viewOrganiser").addEventListener("click", function () { organiserView = true; render(); });
+  $("viewMember").addEventListener("click", function () { organiserView = false; render(); });
+
+  render();
+</script>
+</body>
+</html>

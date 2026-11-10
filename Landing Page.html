@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Circle · Prototype</title>
+<meta name="description" content="A prototype for the person who runs a savings circle. Invented data, no real money.">
+<style>
+  :root {
+    --bg: #dde7f8;
+    --card: #ffffff;
+    --dark: #14161c;
+    --blue: #3f6fe8;
+    --blue-text: #1f4fd1;
+    --blue-soft: #e8eefc;
+    --track: #dfe6f5;
+    --grey: #4a4f5c;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--dark);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .proto {
+    background: var(--dark); color: #fff; padding: 10px 16px;
+    font-size: 16px; font-weight: 600; text-align: center;
+  }
+
+  .hero {
+    background: var(--dark); color: #fff; border-radius: 28px;
+    padding: 28px 22px 26px; margin: 20px 0 16px;
+  }
+  .hero .for { margin: 0 0 10px; color: #b9c3dd; font-size: 18px; }
+  .hero h1 { margin: 0 0 14px; font-size: 36px; line-height: 1.12; font-weight: 800; }
+  .hero p.lead { margin: 0 0 22px; color: #dfe6f5; font-size: 20px; }
+
+  .btn {
+    display: block; width: 100%; min-height: 58px; padding: 14px 20px;
+    border-radius: 999px; border: 0; text-align: center; text-decoration: none;
+    font: inherit; font-size: 20px; font-weight: 700; cursor: pointer;
+  }
+  .btn.primary { background: var(--blue); color: #fff; }
+  .btn.light { background: #fff; color: var(--dark); }
+  .btn.dark { background: var(--dark); color: #fff; }
+  .btn:focus-visible { outline: 4px solid #fff; outline-offset: 3px; }
+  .btn.dark:focus-visible { outline-color: var(--blue-text); }
+
+  .card {
+    background: var(--card); border-radius: 28px; padding: 22px 18px;
+    margin-bottom: 16px; box-shadow: 0 6px 18px rgba(31,79,209,0.08);
+  }
+  h2 { font-size: 26px; line-height: 1.15; margin: 0 0 14px; font-weight: 800; }
+
+  .ringbox { position: relative; width: 100%; max-width: 240px; margin: 4px auto 0; }
+  .ringbox svg { display: block; width: 100%; height: auto; }
+  .ringtext {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+  }
+  .ringtext .big { font-size: 38px; font-weight: 800; line-height: 1; }
+  .ringtext .small { font-size: 17px; color: var(--grey); margin-top: 4px; }
+  .caption { text-align: center; color: var(--grey); font-size: 16px; margin: 12px 0 0; }
+
+  ol { list-style: none; padding: 0; margin: 0; }
+  ol li { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+  ol li:last-child { margin-bottom: 0; }
+  .step {
+    flex: none; width: 44px; height: 44px; border-radius: 50%;
+    background: var(--blue-soft); color: var(--blue-text);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 22px;
+  }
+  ol strong { display: block; font-size: 22px; line-height: 1.25; }
+  ol span.t { color: var(--grey); font-size: 19px; }
+
+  .cta p { margin: 0 0 16px; font-size: 20px; }
+  .cta .small { color: var(--grey); font-size: 17px; margin: 12px 0 0; }
+
+  footer { margin-top: 24px; padding: 16px 4px 0; border-top: 1px solid #c3d0ea; color: var(--grey); font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div class="proto">Prototype with invented data. No real money is used.</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <p class="for">For the person who runs the savings circle</p>
+    <h1>Stop chasing payments. Let everyone see who has paid.</h1>
+    <p class="lead">Your circle on one screen: who has paid this month, and whose turn is next.</p>
+    <a class="btn primary" href="app.html">Try the prototype</a>
+  </section>
+
+  <section class="card">
+    <div class="ringbox" aria-hidden="true">
+      <svg viewBox="0 0 300 300" id="ring"></svg>
+      <div class="ringtext">
+        <span class="big">6 of 10</span>
+        <span class="small">have paid</span>
+      </div>
+    </div>
+    <p class="caption">Example only. The names and amounts are invented.</p>
+  </section>
+
+  <section class="card">
+    <h2>How it works</h2>
+    <ol>
+      <li>
+        <span class="step" aria-hidden="true">1</span>
+        <div><strong>Put your circle in one place</strong><span class="t">Add the people in your circle and the amount each one pays.</span></div>
+      </li>
+      <li>
+        <span class="step" aria-hidden="true">2</span>
+        <div><strong>Mark each payment</strong><span class="t">When someone pays you, tap one button. The screen changes.</span></div>
+      </li>
+      <li>
+        <span class="step" aria-hidden="true">3</span>
+        <div><strong>Everyone can see</strong><span class="t">Members see who has paid and whose turn is next. No more digging in WhatsApp.</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card cta">
+    <h2>Run a circle like this?</h2>
+    <p>Tell us a little about your circle. It takes one minute.</p>
+    <a class="btn dark" id="formBtn" href="#" target="_blank" rel="noopener">Tell us about your circle</a>
+    <p class="small">The form opens in a new tab. Please do not share bank details.</p>
+  </section>
+
+  <footer>
+    This is a prototype. The names and amounts are invented. Nothing here is saved, and no money moves.
+  </footer>
+</div>
+
+<script>
+  // ---- PASTE YOUR GOOGLE FORM *SHARE* LINK HERE (from Send > link), not the /edit link ----
+  var FORM_URL = "https://docs.google.com/forms/d/1_qdeA4nvBTtEivPZDIbK6VoAO5DKEK-QrKwo9wHXzIc/edit";
+
+  document.getElementById("formBtn").setAttribute("href", FORM_URL);
+
+  // Static donut: 6 of 10 paid (invented example)
+  (function () {
+    var total = 10, paid = 6, r = 105, C = 2 * Math.PI * r, seg = C / total, gap = 8, out = "";
+    for (var i = 0; i < total; i++) {
+      out += '<circle cx="150" cy="150" r="' + r + '" fill="none" stroke-width="38"' +
+        ' stroke="' + (i < paid ? "#3f6fe8" : "#dfe6f5") + '"' +
+        ' stroke-dasharray="' + (seg - gap) + " " + (C - (seg - gap)) + '"' +
+        ' stroke-dashoffset="' + (-(i * seg + gap / 2)) + '"' +
+        ' transform="rotate(-90 150 150)"/>';
+    }
+    document.getElementById("ring").innerHTML = out;
+  })();
+</script>
+</body>
+</html>
